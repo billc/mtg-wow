@@ -1,0 +1,5 @@
+name: wow
+dependencies:
+  browser: any
+  html5lib: any
+  http: any
