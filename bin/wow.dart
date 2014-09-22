@@ -60,33 +60,3 @@ void saveImage(String name, var data) {
     ..writeAsBytesSync(data);
   print("Saving $name");
 }
-
-Set removeExisting(Set wallpapers, String location) {
-  print("${wallpapers.length} wallpapers available");
-
-  Directory d = new Directory(location);
-  Set existing = d.listSync().toSet();
-
-  print("${existing.length} existing wallpapers found");
-  existing.forEach(print);
-
-  Set available = new Set();
-  for (var w in wallpapers) {
-    if (!exists(w, existing)) {
-      available.add(w);
-    }
-  }
-
-  print("Found ${available.length} new wallpapers to retrieve");
-  available.forEach(print);
-  print("\n\n");
-
-
-  return available;
-}
-
-bool exists(String s, Set e) {
-  String name = Uri.parse(s).pathSegments.last;
-  print("${e.contains(name)} $name");
-  return e.contains(name);
-}
