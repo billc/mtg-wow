@@ -1,7 +1,8 @@
-import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:async';
 
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
 
 main() {
   var url = "http://magic.wizards.com/en/articles/wallpapers";
@@ -28,8 +29,7 @@ Set<String> selectWallpaper(String response) {
 // Retrieve the wallpaper from the URL and save to the local target location
 
 Future retrieveImage(String location) {
-  Uri uri = Uri.parse(location);
-  String name = uri.pathSegments.last;
+  String name = path.basename(location);
 
   print("Retrieving $location");
   return http.readBytes(location).then((image) => saveImage(name, image));
